@@ -1,0 +1,25 @@
+#Kubernetes deployment manifest
+#Deployment manages multiple pods and ensure availability
+
+apiVersion: apps/v1                      #use the correct version for deployments
+kind: Deployment                         #declares the kubernetes object type,Deployment->Replicaset,pods
+metadata:                                #Holds identifying information about deployments
+  name: nginx-deployment                 #must be unique within the namespace
+  labels:                                #Key value pairs used for identification and selection
+    app: nginx
+spec:                                    #defines the desired state of deployment
+  replicas: 5                            #Ensure kubernetes to maintain 5 running pods at at all time
+  selector:                              #Define how the deployment identifies the pods it manages 
+    matchLabels:                         #use labels to match pods  
+      app: nginx                         #The deployment manage will manage pods with this label,must exactly match pod templatelabels
+  template:                              #describe the pod blueprint the deployment will create
+    metadata:
+      labels:                            #applying labels to each pod
+        app: nginx                       #ensure the pod matches the selector criteria
+    spec:                                #define the pod container specification
+      containers:                        #list of containers running inside the pod 
+      - name: nginx                      #Name of the container inside the pod 
+        image: nginx:latest              #docker image used to create container 
+        ports:
+        - containerPort: 80
+

@@ -1,0 +1,10 @@
+apiVersion: v1            #indicates the kubernets api version used
+kind: Pod                 #Specifies the type of kubernetes object
+metadata:                 #identifying information about k8s object
+  name: sample-pod        #unique name of the pod within the namespace
+spec:                     #Describe the desired state of pod                            
+  containers:
+  - name: nginx-container # Name of the container
+    image: nginx:latest
+    ports:
+    - containerPort: 80 #Exposed port in the container,This does not expose the pod outside the cluster
