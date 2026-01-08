@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-deployment
+  labels:
+    app: prom-dep
+spec:
+  replicas: 2
+  selector:    #Tells the Deployment which Pods it owns and manages.
+    matchLabels:
+      app: prom-dep
+  template: #Every replica created by the Deployment will be based on this template.Matches the selector.Ensures correct ownership
+    metadata:
+      labels:
+        app: prom-dep
+    spec:   #defines the Pod specification 
+      containers:
+      - name: prom-container
+        image: prom/prometheus:latest
+        ports:
+        - containerPort: 9090             #Exposed port of the container 

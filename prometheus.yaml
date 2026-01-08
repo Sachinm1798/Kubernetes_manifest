@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: prometheus-pod
+spec:
+  containers:
+  - name: prom-container
+    image: prom/prometheus:latest
+    ports:
+    - containerPort: 9090
