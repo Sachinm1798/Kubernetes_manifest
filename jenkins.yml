@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-deployment
+  labels:
+    app: jk 
+spec:
+  replicas: 1
+  selector:    
+    matchLabels:
+      app: jk
+  template: 
+    metadata:
+      labels:
+        app: jk
+    spec:   
+      containers:
+      - name: jenkins-containers
+        image: jenkins:2.60.3
+        ports:
+        - containerPort: 8080 
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-service
+spec:
+  type: NodePort
+  selector: #The service will target the pod with jk label
+    app: jk
+  ports:
+   - protocol: TCP
+     port: 8080
+     targetPort: 8080
+     nodePort: 32000
+

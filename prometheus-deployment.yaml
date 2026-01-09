@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: prometheus-deployment
   labels:
-    app: prom-dep
+    app: prom-dep #completely used for deployment identification
 spec:
   replicas: 2
   selector:    #Tells the Deployment which Pods it owns and manages.
