@@ -31,7 +31,6 @@ spec:
     app: jk
   ports:
    - protocol: TCP
-     port: 8080
-     targetPort: 8080
-     nodePort: 32000
-
+     port: 8080       #Expose port in clusterIP network
+     targetPort: 8080 #to connect with container port in the pogit
+     nodePort: 320000 #Expose the port in node

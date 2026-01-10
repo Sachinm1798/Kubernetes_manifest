@@ -6,15 +6,15 @@ kind: Deployment                         #declares the kubernetes object type,De
 metadata:                                #Holds identifying information about deployments
   name: nginx-deployment                 #must be unique within the namespace
   labels:                                #is only for identifying the Deployment itself
-    app: nginx
-spec:                                    #defines the desired state of deployment
+    key: value
+spec:                                    #defines the desired state of deployment/Specfication of deployment
   replicas: 3                            #Ensure kubernetes to maintain 5 running pods at at all time
-  selector:                              #Tells the Deployment which pod it manages 
+  selector:                              #TELLS the Deployment to use these labels to which pod it manages:Only configuration part 
     matchLabels:                         #use labels to match pods  
       app: nginx                    #The deployment manage will manage pods with this label,must exactly match pod templatelabels
   template:                              #describe the pod blueprint the deployment will create
     metadata:
-      labels:                            #applying labels to each pod
+      labels:                            #APPLYing labels to each pod
         app: nginx                       #ensure the pod matches the selector labels and ensure correct ownership
     spec:                                #define the pod container specification
       containers:                        #list of containers running inside the pod 
@@ -22,4 +22,19 @@ spec:                                    #defines the desired state of deploymen
         image: nginx:latest              #docker image used to create container 
         ports:
         - containerPort: 80
+---
+#Creates a ClusterIP service
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:            #The label applied matches with deployment label
+    key: value
+  ports:
+    - protocol: TCP
+      port: 8888
+      targetPort: 80
 
