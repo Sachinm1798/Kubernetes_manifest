@@ -1,0 +1,31 @@
+#Creating a Ingress service component
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: myapp-ingress
+spec:
+  rules:
+  - host: myapp.com  #The domain name given at browser mapped with IPaddress of Node
+    http:
+      paths:
+      - backend:
+           serviceName: myapp-internal-service  #internal service which ingress is connected
+           servicePort: 8080 #ingress forward to clusterIP:port
+
+---
+#INTERNAL SERVICE
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-internal-service
+spec:
+  selector:
+    app: myapp #use these label to select pods
+  ports:
+    - protocol: TCP
+      port: 8080       #ClusterIP:port
+      targetPort: 8080 #pod port
+
+#Step2:Create a Ingress Controller Pod to evaluate all ingress rulesj
