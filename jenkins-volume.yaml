@@ -1,0 +1,23 @@
+apiVersion: v1             
+kind: Pod                  
+metadata:                  
+  name: jk-pod         
+spec:                                                
+  containers:
+  - name: jk 
+    image: jenkins:2.60.3
+    ports:
+    - containerPort: 8080  
+    volumeMounts:
+    - name: jk-data                 #create a volume mount point in container filesystem
+      mountPath: /var/jenkins_data  #attach custom storage
+  volumes:
+  - name: jk-data                   #This is a pod scoped volume 
+    hostPath:
+      path: /backup_k8s/jk
+      type: DirectoryOrCreate
+      
+#hostPath is the mountpoint in the node. 
+#minikube ssh --> to login to the minikube node.
+#mkdir -p /backup_k8s/jk  -->Create a directory in nodes filesystem.
+#Jenkins typically stores data in /var/jenkins_home.pm-data

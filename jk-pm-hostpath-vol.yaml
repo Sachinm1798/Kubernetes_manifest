@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jk-pm-pod
+spec:                                                
+  containers:
+  - name: jk 
+    image: jenkins:2.60.3
+    ports:
+    - containerPort: 8080  
+    volumeMounts:
+    - name: my-data         
+      mountPath: /var/jenkins_data  
+  - name: pm
+    image: prom/prometheus
+    ports:
+    - containerPort: 9090
+    volumeMounts:
+    - name: my-data         
+      mountPath: /var/prom_data
+   
+  volumes:                            #pod scoped volume available for multiple containers
+  - name: my-data      
+    hostPath:
+      path: /backup_k8s/jk
+      type: DirectoryOrCreate
+
+#kubectl exec -it <pod_name> -c <container_name> -- /bin/bash

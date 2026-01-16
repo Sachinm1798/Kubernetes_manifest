@@ -2,7 +2,7 @@
 #Deployment manages multiple pods and ensure availability
 
 apiVersion: apps/v1                      #use the correct version for deployments
-kind: Deployment                         #declares the kubernetes object type,Deployment->Replicaset,pods
+kind: Deployment                         #declares the kubernetes object type,Deployment->Replicaset,pods,Secrets.ConfigMaps,Services
 metadata:                                #Holds identifying information about deployments
   name: nginx-deployment                 #must be unique within the namespace
   labels:                                #is only for identifying the Deployment itself
