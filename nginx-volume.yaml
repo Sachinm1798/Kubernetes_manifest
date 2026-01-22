@@ -11,6 +11,6 @@ spec:
     volumeMounts:
       - name: logitech
         mountPath: /usr/share/nginx
-  volumes:
+  volumes:             #Pod scoped volume emptyDir but deleted along with pod ephemeral
     - name: logitech
       emptyDir: {}

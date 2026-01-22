@@ -8,7 +8,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mongodbmongodb
+      app: mongodb
   template:
     metadata:
       labels:
@@ -31,7 +31,7 @@ spec:
                 name: mongodb-secret
                 key: mongo-root-password
 ---
-#Create an Internal Service to access the database
+#Create an Internal Service for internal communication to the database
 apiVersion: v1
 kind: Service
 metadata:
@@ -43,3 +43,4 @@ spec:
     - protocol: TCP
       port: 27017       #Service port
       targetPort: 27017 #containerport
+ 

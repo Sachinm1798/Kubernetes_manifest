@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox
+  labels:
+    app: box
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busybox
+  template:
+    metadata:
+      labels:
+        app: busybox
+    spec:   
+      containers:
+      - name: busybox
+        image: busybox:unstable-musl
+        command: ["/bin/sh", "-c"]
+        args: ["while true; do date; sleep 10; done"]
+      restartPolicy: Always
+
+#kubectl logs <pod_name> -f

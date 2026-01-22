@@ -11,7 +11,7 @@ spec:                                    #defines the desired state of deploymen
   replicas: 3                            #Ensure kubernetes to maintain 5 running pods at at all time
   selector:                              #TELLS the Deployment to use these labels to which pod it manages:Only configuration part 
     matchLabels:                         #use labels to match pods  
-      app: nginx                    #The deployment manage will manage pods with this label,must exactly match pod templatelabels
+      app: nginx                         #The deployment manage will manage pods with this label,must exactly match pod templatelabels
   template:                              #describe the pod blueprint the deployment will create
     metadata:
       labels:                            #APPLYing labels to each pod

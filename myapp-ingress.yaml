@@ -1,4 +1,4 @@
-#Creating a Ingress service component
+ #Creating a Ingress service component
 
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress

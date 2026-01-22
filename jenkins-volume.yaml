@@ -12,7 +12,7 @@ spec:
     - name: jk-data                 #create a volume mount point in container filesystem
       mountPath: /var/jenkins_data  #attach custom storage
   volumes:
-  - name: jk-data                   #This is a pod scoped volume 
+  - name: jk-data                   #This is a pod scoped volume persist its life independent of pod
     hostPath:
       path: /backup_k8s/jk
       type: DirectoryOrCreate

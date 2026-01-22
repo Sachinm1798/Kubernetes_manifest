@@ -30,13 +30,13 @@ spec:
              secretKeyRef:
                 name: mongodb-secret
                 key: mongo-root-password
-        - name: ME_CONFIG_MONGODB_SERVER
+        - name: ME_CONFIG_MONGODB_SERVER #The databse which it should connect
           valueFrom:
              configMapKeyRef:
                 name: mongodb-configmap
                 key: database_url
 
-#Creating a external service to access the mongoexpress pod
+#Creating a Load balancer external service to access the mongoexpress pod
 ---
 apiVersion: v1
 kind: Service

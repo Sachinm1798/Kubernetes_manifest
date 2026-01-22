@@ -23,6 +23,7 @@ spec:
   - name: my-data      
     hostPath:
       path: /backup_k8s/jk
-      type: DirectoryOrCreate
+      type: DirectoryOrCreate         #if directory dont exsist automatically create
 
 #kubectl exec -it <pod_name> -c <container_name> -- /bin/bash
+#ConfigMap volumes inject external, read-only configuration; emptyDir provides writable, temporary storage tied to the Pod lifecycle

@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-server
+  labels:
+    app: mysql-server
+spec:
+  containers:
+    - name: mysql-server
+      image: mysql:8.0-debian 
+      ports:
+        - name: mysql-port
+          containerPort: 3306
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-root-password
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-password
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-user
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-database
+      # Optional: Mount a volume for data persistence (highly recommended for production)
+      # volumeMounts:
+      #   - name: mysql-persistent-storage
+      #     mountPath: /var/lib/mysql
+  # Optional: Define volumes if using persistence
+  # volumes:
+  #   - name: mysql-persistent-storage
+  #     persistentVolumeClaim:
+  #       claimName: mysql-pv-claim

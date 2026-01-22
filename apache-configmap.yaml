@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: httpd
+spec:
+  containers:
+  - name: httpd
+    image: httpd:latest
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: web-data
+      mountPath: /usr/local/apache2/htdocs
+  volumes:                     #configmap volume definition
+  - name: web-data
+    configMap:
+      name: apache-config
+      
+#you are defining a Pod-scoped volume whose source is a ConfigMap.
+#kubectl create configmap <apache-config> --from-file=template4 -->to create a configmap with template
+#kubectl get configmap apache-config -o yaml  -->To list configmaps
+#kubectl port-forward <pod_name> 8888:80
+#ConfigMap volumes inject external, read-only configuration; emptyDir provides writable, temporary storage tied to the Pod lifecycle

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node
+  labels:
+    app: node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node
+  template:
+    metadata:
+      labels:
+        app: node
+    spec:   
+      containers:
+      - name: node
+        image: node:4
+        ports:
+        - containerPort: 3000
+        command: ["/bin/sh","-c","sleep"," infinity"]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-nodeport
+spec:
+  type: NodePort
+  selector:
+    app: node
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 80 
+      nodePort: 30008
