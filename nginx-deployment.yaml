@@ -33,9 +33,9 @@ metadata:
   name: nginx-service
 spec:
   selector:            #The label applied matches with deployment label
-    key: value
+    app: nginx
   ports:
     - protocol: TCP
-      port: 8888
-      targetPort: 80
+      port: 8888       #ClusterIP:Port expose the container at cluster level.
+      targetPort: 80   #containerport
 

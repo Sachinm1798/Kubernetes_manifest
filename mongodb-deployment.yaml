@@ -41,6 +41,6 @@ spec:
     app: mongodb
   ports:
     - protocol: TCP
-      port: 27017       #Service port
+      port: 27017       #Service port clusterIP:Port
       targetPort: 27017 #containerport
  

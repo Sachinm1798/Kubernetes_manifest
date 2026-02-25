@@ -32,6 +32,11 @@ spec:
             secretKeyRef:
               name: mysql-secret
               key: mysql-database
+        
+         
+  #   - name: mysql-persistent-storage
+  #     persistentVolumeClaim:
+  #       claimName: mysql-pv-claim
       # Optional: Mount a volume for data persistence (highly recommended for production)
       # volumeMounts:
       #   - name: mysql-persistent-storage

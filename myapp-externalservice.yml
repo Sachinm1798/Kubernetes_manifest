@@ -1,6 +1,5 @@
 #LoadBalancer connects with clusterIp and gives external access for apps
 
-
 apiVersion: v1
 kind: Service
 metadata:

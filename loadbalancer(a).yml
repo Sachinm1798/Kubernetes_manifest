@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-deployment1
+  labels:
+    app: key1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: key1
+  template:
+    metadata:
+      labels:
+        app: key1
+    spec:
+      containers:
+      - name: whoami
+        image: traefik/whoami #hashicorp/http-echo:latest    -->An another example
+        #args:
+          #- "-text=Hello from Pod $HOSTNAME"
+        ports:
+          - containerPort: 80
+
+#LoadBalancer Network service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: load-balancer
+spec:
+  type: LoadBalancer
+  selector: 
+    app: key1
+  ports:
+   - protocol: TCP      
+     port: 80
+     targetPort: 80 #5678
+     nodePort: 30001
+    
+
+    
+
+

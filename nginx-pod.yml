@@ -1,4 +1,4 @@
-apiVersion: v1             #indicates the kubernets api version used
+apiVersion: v1             #indicates the kubernetes api version used
 kind: Pod                  #Specifies the type of kubernetes object
 metadata:                  #identifying information about k8s object
   name: sample-pod         #unique name of the pod within the namespace
